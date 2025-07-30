@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Ncorr C++</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0" rowspan="2">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QGroupBox" name="group_state">
+        <property name="title">
+         <string>Program State</string>
+        </property>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_refloaded">
+           <property name="text">
+            <string>Reference Image:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="text_refloaded_s">
+           <property name="text">
+            <string>NOT SET</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_curloaded">
+           <property name="text">
+            <string>Current Image(s):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="text_curloaded_s">
+           <property name="text">
+            <string>NOT SET</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="group_roi_display">
+        <property name="title">
+         <string>Region of Interest</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QLabel" name="axes_roi">
+           <property name="text">
+            <string>ROI Preview</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="group_ref">
+      <property name="title">
+       <string>Reference Image</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="axes_ref">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Reference Image Display</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="text_refname">
+         <property name="text">
+          <string>Name:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QGroupBox" name="group_cur">
+      <property name="title">
+       <string>Current Image(s)</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QLabel" name="axes_cur">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Current Image Display</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="text_curname">
+           <property name="text">
+            <string>Name:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="button_left">
+           <property name="text">
+            <string>&lt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="edit_imgnum">
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="button_right">
+           <property name="text">
+            <string>&gt;</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1200</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLoad_Reference_Image"/>
+    <addaction name="actionLoad_Current_Images"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoad_Data"/>
+    <addaction name="actionSave_Data"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuRegion_of_Interest">
+    <property name="title">
+     <string>Region of Interest</string>
+    </property>
+    <addaction name="actionSet_Reference_ROI"/>
+   </widget>
+   <widget class="QMenu" name="menuAnalysis">
+    <property name="title">
+     <string>Analysis</string>
+    </property>
+    <addaction name="actionSet_DIC_Parameters"/>
+    <addaction name="actionPerform_DIC_Analysis"/>
+   </widget>
+   <widget class="QMenu" name="menuPlot">
+    <property name="title">
+     <string>Plot</string>
+    </property>
+    <widget class="QMenu" name="menuDisplacement">
+     <property name="title">
+      <string>Displacement</string>
+     </property>
+     <addaction name="actionPlot_U"/>
+     <addaction name="actionPlot_V"/>
+    </widget>
+    <widget class="QMenu" name="menuStrain">
+     <property name="title">
+      <string>Strain</string>
+     </property>
+     <addaction name="actionPlot_Exx"/>
+     <addaction name="actionPlot_Eyy"/>
+     <addaction name="actionPlot_Exy"/>
+    </widget>
+    <addaction name="menuDisplacement"/>
+    <addaction name="menuStrain"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuRegion_of_Interest"/>
+   <addaction name="menuAnalysis"/>
+   <addaction name="menuPlot"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionLoad_Reference_Image">
+   <property name="text">
+    <string>Load Reference Image</string>
+   </property>
+  </action>
+  <action name="actionLoad_Current_Images">
+   <property name="text">
+    <string>Load Current Images</string>
+   </property>
+  </action>
+  <action name="actionLoad_Data">
+   <property name="text">
+    <string>Load Data</string>
+   </property>
+  </action>
+  <action name="actionSave_Data">
+   <property name="text">
+    <string>Save Data</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionSet_Reference_ROI">
+   <property name="text">
+    <string>Set Reference ROI</string>
+   </property>
+  </action>
+  <action name="actionSet_DIC_Parameters">
+   <property name="text">
+    <string>Set DIC Parameters</string>
+   </property>
+  </action>
+  <action name="actionPerform_DIC_Analysis">
+   <property name="text">
+    <string>Perform DIC Analysis</string>
+   </property>
+  </action>
+  <action name="actionPlot_U">
+   <property name="text">
+    <string>U</string>
+   </property>
+  </action>
+  <action name="actionPlot_V">
+   <property name="text">
+    <string>V</string>
+   </property>
+  </action>
+  <action name="actionPlot_Exx">
+   <property name="text">
+    <string>Exx</string>
+   </property>
+  </action>
+  <action name="actionPlot_Eyy">
+   <property name="text">
+    <string>Eyy</string>
+   </property>
+  </action>
+  <action name="actionPlot_Exy">
+   <property name="text">
+    <string>Exy</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

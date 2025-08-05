@@ -45,9 +45,12 @@ cv::Mat MainWindow::array2d_to_cvmat(const ncorr::Array2D<double>& array)
         return cv::Mat();
     }
 
+    using ncorr::min;
+    using ncorr::max;
+
     cv::Mat mat(array.height(), array.width(), CV_8UC1);
-    double min_val = ncorr::min(array); // Correctly called on a double array
-    double max_val = ncorr::max(array); // Correctly called on a double array
+    double min_val = min(array); // Correctly called on a double array
+    double max_val = max(array); // Correctly called on a double array
     double scale = 255.0;
     if (max_val > min_val) {
         scale = 255.0 / (max_val - min_val);
@@ -232,7 +235,7 @@ void MainWindow::plot_data(const ncorr::Data2D& data_to_plot, const QString& win
     }
     // Using namedWindow to avoid conflicts with other windows
     cv::destroyWindow(window_title.toStdString());
-    ncorr::imshow(data_to_plot);
+    imshow(data_to_plot);
     cv::setWindowTitle(window_title.toStdString(), window_title.toStdString());
 }
 

@@ -46,13 +46,22 @@ cv::Mat MainWindow::array2d_to_cvmat(const ncorr::Array2D<double>& array)
     }
 
     cv::Mat mat(array.height(), array.width(), CV_8UC1);
-    double min_val = ncorr::min(array); // Correctly called on a double array
-    double max_val = ncorr::max(array); // Correctly called on a double array
+
+    // Compute min and max explicitly to avoid issues with ncorr::min/max
+    double min_val = array(0,0);
+    double max_val = array(0,0);
+    for (int r = 0; r < array.height(); ++r) {
+        for (int c = 0; c < array.width(); ++c) {
+            double val = array(r,c);
+            if (val < min_val) min_val = val;
+            if (val > max_val) max_val = val;
+        }
+    }
+
     double scale = 255.0;
     if (max_val > min_val) {
         scale = 255.0 / (max_val - min_val);
     }
-
 
     for (int r = 0; r < array.height(); ++r) {
         for (int c = 0; c < array.width(); ++c) {

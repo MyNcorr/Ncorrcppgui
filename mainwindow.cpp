@@ -10,6 +10,7 @@
 #include <QDebug>
 
 #include <thread>
+#include <algorithm>
 
 // OpenCV includes needed for image conversion and display
 #include "opencv2/core.hpp"
@@ -38,36 +39,33 @@ MainWindow::~MainWindow()
 //----------------------------------------------------------------//
 
 // This function correctly converts Ncorr's custom array to an OpenCV Mat
-cv::Mat MainWindow::array2d_to_cvmat(const ncorr::Array2D<double>& array)
+// and works with any numeric element type.
+template <typename T>
+cv::Mat MainWindow::array2d_to_cvmat(const ncorr::Array2D<T>& array)
 {
-    // The min/max functions in Ncorr are defined for arithmetic types, not bool.
-    // The error occurs because you might be calling this on a mask.
-    // This corrected version assumes the input 'array' is the data you want to visualize.
+    // Ncorr's ROI-aware min/max helpers expect two arguments and fail on
+    // boolean arrays.  Use std::minmax_element to compute the intensity
+    // bounds directly so this routine works for any numeric Array2D.
     if (array.empty()) {
         return cv::Mat();
     }
 
     cv::Mat mat(array.height(), array.width(), CV_8UC1);
 
-    // Compute min and max explicitly to avoid issues with ncorr::min/max
-    double min_val = array(0,0);
-    double max_val = array(0,0);
-    for (int r = 0; r < array.height(); ++r) {
-        for (int c = 0; c < array.width(); ++c) {
-            double val = array(r,c);
-            if (val < min_val) min_val = val;
-            if (val > max_val) max_val = val;
-        }
-    }
+    auto minmax = std::minmax_element(array.cbegin(), array.cend());
+    T min_val = *minmax.first;
+    T max_val = *minmax.second;
 
     double scale = 255.0;
     if (max_val > min_val) {
-        scale = 255.0 / (max_val - min_val);
+        scale = 255.0 /
+                static_cast<double>(max_val - min_val);
     }
 
     for (int r = 0; r < array.height(); ++r) {
         for (int c = 0; c < array.width(); ++c) {
-            mat.at<uchar>(r, c) = static_cast<uchar>((array(r, c) - min_val) * scale);
+            mat.at<uchar>(r, c) = static_cast<uchar>(
+                static_cast<double>(array(r, c) - min_val) * scale);
         }
     }
     return mat;

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Ncorr C++</string>
+   <string>Ncorr C++ GUI</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -31,7 +31,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLabel" name="text_refloaded_s">
+          <widget class="QLabel" name="status_ref_loaded">
            <property name="text">
             <string>NOT SET</string>
            </property>
@@ -45,7 +45,77 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLabel" name="text_curloaded_s">
+          <widget class="QLabel" name="status_cur_loaded">
+           <property name="text">
+            <string>NOT SET</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Region of Interest:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>DIC Parameters:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>DIC Analysis:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Displacements:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Strains:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="status_roi_loaded">
+           <property name="text">
+            <string>NOT SET</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLabel" name="status_dic_params_loaded">
+           <property name="text">
+            <string>NOT SET</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLabel" name="status_dic_analysis_loaded">
+           <property name="text">
+            <string>NOT SET</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLabel" name="status_disp_loaded">
+           <property name="text">
+            <string>NOT SET</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QLabel" name="status_strain_loaded">
            <property name="text">
             <string>NOT SET</string>
            </property>
@@ -81,7 +151,7 @@
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>40</height>
+          <height>10</height>
          </size>
         </property>
        </spacer>

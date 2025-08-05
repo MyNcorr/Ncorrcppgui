@@ -2,7 +2,6 @@
 #define DICPARAMETERSDIALOG_H
 
 #include <QDialog>
-#include <QSpinBox>
 
 namespace Ui {
 class DICParametersDialog;
@@ -15,7 +14,7 @@ class DICParametersDialog : public QDialog
 public:
     explicit DICParametersDialog(QWidget *parent = nullptr);
     ~DICParametersDialog();
-    
+
     // Public methods to get the values
     int getSubsetRadius() const;
     int getSubsetSpacing() const;

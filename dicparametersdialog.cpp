@@ -6,6 +6,9 @@ DICParametersDialog::DICParametersDialog(QWidget *parent) :
     ui(new Ui::DICParametersDialog)
 {
     ui->setupUi(this);
+    // Connect the buttonBox signals to the dialog's slots
+    connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &DICParametersDialog::accept);
+    connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &DICParametersDialog::reject);
 }
 
 DICParametersDialog::~DICParametersDialog()

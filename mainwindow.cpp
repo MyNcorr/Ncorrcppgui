@@ -10,6 +10,7 @@
 #include <QDebug>
 
 #include <thread>
+#include <algorithm>
 
 // OpenCV includes needed for image conversion and display
 #include "opencv2/core.hpp"
@@ -40,25 +41,20 @@ MainWindow::~MainWindow()
 // This function correctly converts Ncorr's custom array to an OpenCV Mat
 cv::Mat MainWindow::array2d_to_cvmat(const ncorr::Array2D<double>& array)
 {
-    // The min/max functions in Ncorr are defined for arithmetic types, not bool.
-    // The error occurs because you might be calling this on a mask.
-    // This corrected version assumes the input 'array' is the data you want to visualize.
+    // The min/max helpers in ncorr require two arguments for ROI-aware
+    // searches and break when `Array2D<bool>` is supplied.  Compute the
+    // minimum and maximum directly to keep this routine generic.
     if (array.empty()) {
         return cv::Mat();
     }
 
     cv::Mat mat(array.height(), array.width(), CV_8UC1);
 
-    // Compute min and max explicitly to avoid issues with ncorr::min/max
-    double min_val = array(0,0);
-    double max_val = array(0,0);
-    for (int r = 0; r < array.height(); ++r) {
-        for (int c = 0; c < array.width(); ++c) {
-            double val = array(r,c);
-            if (val < min_val) min_val = val;
-            if (val > max_val) max_val = val;
-        }
-    }
+    const double *begin = array.get_pointer();
+    const double *end   = begin + array.size();
+    auto minmax = std::minmax_element(begin, end);
+    double min_val = *minmax.first;
+    double max_val = *minmax.second;
 
     double scale = 255.0;
     if (max_val > min_val) {
@@ -67,7 +63,8 @@ cv::Mat MainWindow::array2d_to_cvmat(const ncorr::Array2D<double>& array)
 
     for (int r = 0; r < array.height(); ++r) {
         for (int c = 0; c < array.width(); ++c) {
-            mat.at<uchar>(r, c) = static_cast<uchar>((array(r, c) - min_val) * scale);
+            mat.at<uchar>(r, c) =
+                static_cast<uchar>((array(r, c) - min_val) * scale);
         }
     }
     return mat;

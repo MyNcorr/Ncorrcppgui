@@ -50,9 +50,7 @@ cv::Mat MainWindow::array2d_to_cvmat(const ncorr::Array2D<double>& array)
 
     cv::Mat mat(array.height(), array.width(), CV_8UC1);
 
-    const double *begin = array.get_pointer();
-    const double *end   = begin + array.size();
-    auto minmax = std::minmax_element(begin, end);
+    auto minmax = std::minmax_element(array.cbegin(), array.cend());
     double min_val = *minmax.first;
     double max_val = *minmax.second;
 

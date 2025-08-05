@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream &os, const Data2D &data) {
     return os;
 }
 
-void imshow(const Data2D &data, Data2D::difference_type delay) { 
+void imshow(const Data2D &data, Data2D::difference_type delay) {
     // Form buffer; set all values outside of ROI to slightly below minimum 
     // value of data, then show it, this guarantees the area outside the ROI is 
     // black.

@@ -31,7 +31,7 @@ std::ostream& operator<<(std::ostream &os, const Disp2D &disp) {
     return os;
 }
 
-void imshow(const Disp2D &disp, Disp2D::difference_type delay) { 
+void imshow(const Disp2D &disp, Disp2D::difference_type delay) {
     // Just show each separately for now. If you combine into one buffer, you 
     // must scale each as their ranges might be different.
     imshow(disp.v, delay); 

@@ -12,7 +12,7 @@
 
 namespace ncorr {     
     
-class Image2D final { 
+class Image2D final {
     public:                 
         typedef std::ptrdiff_t                                  difference_type; 
         
@@ -32,8 +32,8 @@ class Image2D final {
         static Image2D load(std::ifstream&);
             
         // Interface functions -----------------------------------------------//
-        friend std::ostream& operator<<(std::ostream&, const Image2D&); 
-        friend void imshow(const Image2D&, difference_type delay = -1);  
+        friend std::ostream& operator<<(std::ostream&, const Image2D&);
+        friend void imshow(const Image2D&, difference_type delay);
         friend bool isequal(const Image2D&, const Image2D&);
         friend void save(const Image2D&, std::ofstream&);
         
@@ -44,6 +44,8 @@ class Image2D final {
     private:
         std::shared_ptr<std::string> filename_ptr; // immutable
 };
+
+void imshow(const Image2D&, Image2D::difference_type delay = -1);
 
 }
 

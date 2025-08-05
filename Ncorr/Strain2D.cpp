@@ -35,7 +35,7 @@ std::ostream& operator<<(std::ostream &os, const Strain2D &strain) {
     return os;
 }
 
-void imshow(const Strain2D &strain, Strain2D::difference_type delay) { 
+void imshow(const Strain2D &strain, Strain2D::difference_type delay) {
     // Just show each separately for now. If you combine into one buffer, you 
     // must scale each as their ranges might be different.
     imshow(strain.eyy, delay); 

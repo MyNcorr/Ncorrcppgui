@@ -43,9 +43,9 @@ MainWindow::~MainWindow()
 template <typename T>
 cv::Mat MainWindow::array2d_to_cvmat(const ncorr::Array2D<T>& array)
 {
-    // The min/max helpers in ncorr require two arguments for ROI-aware
-    // searches and break when `Array2D<bool>` is supplied.  Compute the
-    // minimum and maximum directly to keep this routine generic.
+    // Ncorr's ROI-aware min/max helpers expect two arguments and fail on
+    // boolean arrays.  Use std::minmax_element to compute the intensity
+    // bounds directly so this routine works for any numeric Array2D.
     if (array.empty()) {
         return cv::Mat();
     }

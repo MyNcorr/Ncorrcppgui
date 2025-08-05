@@ -44,8 +44,8 @@ public:
     static Strain2D load(std::ifstream&);
 
     // Operators interface ---------------------------------------------------//
-    friend std::ostream& operator<<(std::ostream&, const Strain2D&); 
-    friend void imshow(const Strain2D&, difference_type delay = -1);  
+    friend std::ostream& operator<<(std::ostream&, const Strain2D&);
+    friend void imshow(const Strain2D&, difference_type delay);
     friend bool isequal(const Strain2D&, const Strain2D&);
     friend void save(const Strain2D&, std::ofstream&);
         
@@ -71,6 +71,8 @@ private:
     Data2D exy;   // Immutable - Data2D has pointer semantics
     Data2D exx;   // Immutable - Data2D has pointer semantics
 };
+
+void imshow(const Strain2D&, Strain2D::difference_type delay = -1);
   
 namespace details {    
     class Strain2D_nlinfo_interpolator final {    

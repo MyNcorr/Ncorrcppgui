@@ -34,9 +34,9 @@ std::ostream& operator<<(std::ostream &os, const Image2D &img) {
     return os;
 }
 
-void imshow(const Image2D &img, Image2D::difference_type delay) { 
+void imshow(const Image2D &img, Image2D::difference_type delay) {
     imshow(img.get_gs(),delay);
-}  
+}
 
 bool isequal(const Image2D &img1, const Image2D &img2) {
     return *img1.filename_ptr == *img2.filename_ptr;

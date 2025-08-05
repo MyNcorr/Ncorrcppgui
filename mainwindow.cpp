@@ -9,6 +9,8 @@
 #include <QProgressDialog>
 #include <QDebug>
 
+#include <thread>
+
 // OpenCV includes needed for image conversion and display
 #include "opencv2/core.hpp"
 #include "opencv2/imgproc.hpp"
@@ -213,7 +215,7 @@ void MainWindow::on_actionPerform_DIC_Analysis_triggered()
         progress.setValue(10);
         QApplication::processEvents();
 
-        dic_output = std::make_unique<ncorr::DIC_analysis_output>(ncorr::DIC_analysis(dic_input));
+        dic_output.reset(new ncorr::DIC_analysis_output(ncorr::DIC_analysis(dic_input)));
 
         analysis_completed = true;
 
@@ -264,7 +266,7 @@ void MainWindow::on_actionPlot_Exx_triggered()
         // Lazily compute strain if not already done
         ncorr::DIC_analysis_input dummy_input; // Dummy input, not used by strain analysis
         ncorr::strain_analysis_input strain_input(dummy_input, *dic_output, ncorr::SUBREGION::CIRCLE, 5);
-        strain_output = std::make_unique<ncorr::strain_analysis_output>(ncorr::strain_analysis(strain_input));
+        strain_output.reset(new ncorr::strain_analysis_output(ncorr::strain_analysis(strain_input)));
     }
 
     if (current_image_index < static_cast<int>(strain_output->strains.size())) {
@@ -278,7 +280,7 @@ void MainWindow::on_actionPlot_Eyy_triggered()
     if (!strain_output) {
         ncorr::DIC_analysis_input dummy_input;
         ncorr::strain_analysis_input strain_input(dummy_input, *dic_output, ncorr::SUBREGION::CIRCLE, 5);
-        strain_output = std::make_unique<ncorr::strain_analysis_output>(ncorr::strain_analysis(strain_input));
+        strain_output.reset(new ncorr::strain_analysis_output(ncorr::strain_analysis(strain_input)));
     }
 
     if (current_image_index < static_cast<int>(strain_output->strains.size())) {
@@ -292,7 +294,7 @@ void MainWindow::on_actionPlot_Exy_triggered()
     if (!strain_output) {
         ncorr::DIC_analysis_input dummy_input;
         ncorr::strain_analysis_input strain_input(dummy_input, *dic_output, ncorr::SUBREGION::CIRCLE, 5);
-        strain_output = std::make_unique<ncorr::strain_analysis_output>(ncorr::strain_analysis(strain_input));
+        strain_output.reset(new ncorr::strain_analysis_output(ncorr::strain_analysis(strain_input)));
     }
 
     if (current_image_index < static_cast<int>(strain_output->strains.size())) {

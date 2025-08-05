@@ -52,8 +52,8 @@ public:
     static Data2D load(std::ifstream&);
         
     // Operators interface ---------------------------------------------------//
-    friend std::ostream& operator<<(std::ostream&, const Data2D&); 
-    friend void imshow(const Data2D&, difference_type delay = -1);  
+    friend std::ostream& operator<<(std::ostream&, const Data2D&);
+    friend void imshow(const Data2D&, difference_type delay);
     friend bool isequal(const Data2D&, const Data2D&);
     friend void save(const Data2D&, std::ofstream&);
        
@@ -81,6 +81,8 @@ private:
     ROI2D roi;                                  // immutable - ROI2D already has pointer semantics
     std::shared_ptr<Array2D<double>> A_ptr;     // immutable
 };
+
+void imshow(const Data2D&, Data2D::difference_type delay = -1);
 
 namespace details {
     class Data2D_nlinfo_interpolator final {    

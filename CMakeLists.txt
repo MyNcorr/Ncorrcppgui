@@ -83,4 +83,5 @@ add_custom_command(TARGET NcorrGUI POST_BUILD
 # --- Suppress specific MSVC warnings ---
 if(MSVC)
     target_compile_options(NcorrGUI PRIVATE /wd4267 /wd4244)
+    target_compile_definitions(NcorrGUI PRIVATE _SCL_SECURE_NO_WARNINGS)
 endif()

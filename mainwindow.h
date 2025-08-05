@@ -78,7 +78,8 @@ private:
     void update_image_displays();
     void update_status_labels();
     void plot_data(const ncorr::Data2D& data_to_plot, const QString& window_title);
-    cv::Mat array2d_to_cvmat(const ncorr::Array2D<double>& array);
+    template <typename T>
+    cv::Mat array2d_to_cvmat(const ncorr::Array2D<T>& array);
     QPixmap mat_to_qpixmap(const cv::Mat& mat);
 };
 

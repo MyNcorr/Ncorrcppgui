@@ -39,7 +39,9 @@ MainWindow::~MainWindow()
 //----------------------------------------------------------------//
 
 // This function correctly converts Ncorr's custom array to an OpenCV Mat
-cv::Mat MainWindow::array2d_to_cvmat(const ncorr::Array2D<double>& array)
+// and works with any numeric element type.
+template <typename T>
+cv::Mat MainWindow::array2d_to_cvmat(const ncorr::Array2D<T>& array)
 {
     // The min/max helpers in ncorr require two arguments for ROI-aware
     // searches and break when `Array2D<bool>` is supplied.  Compute the
@@ -51,18 +53,19 @@ cv::Mat MainWindow::array2d_to_cvmat(const ncorr::Array2D<double>& array)
     cv::Mat mat(array.height(), array.width(), CV_8UC1);
 
     auto minmax = std::minmax_element(array.cbegin(), array.cend());
-    double min_val = *minmax.first;
-    double max_val = *minmax.second;
+    T min_val = *minmax.first;
+    T max_val = *minmax.second;
 
     double scale = 255.0;
     if (max_val > min_val) {
-        scale = 255.0 / (max_val - min_val);
+        scale = 255.0 /
+                static_cast<double>(max_val - min_val);
     }
 
     for (int r = 0; r < array.height(); ++r) {
         for (int c = 0; c < array.width(); ++c) {
-            mat.at<uchar>(r, c) =
-                static_cast<uchar>((array(r, c) - min_val) * scale);
+            mat.at<uchar>(r, c) = static_cast<uchar>(
+                static_cast<double>(array(r, c) - min_val) * scale);
         }
     }
     return mat;
